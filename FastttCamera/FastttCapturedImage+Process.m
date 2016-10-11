@@ -41,7 +41,7 @@ withPreviewOrientation:(UIDeviceOrientation)previewOrientation
 - (void)scaleToMaxDimension:(CGFloat)maxDimension
                withCallback:(void (^)(FastttCapturedImage *capturedImage))callback
 {
-    self.scaledImage = [self.fullImage fastttScaledImageWithMaxDimension:maxDimension];
+    self.fullImage = [self.fullImage fastttScaledImageWithMaxDimension:maxDimension];
     
     if (callback) {
         callback(self);
@@ -51,7 +51,7 @@ withPreviewOrientation:(UIDeviceOrientation)previewOrientation
 - (void)scaleToSize:(CGSize)size
        withCallback:(void (^)(FastttCapturedImage *capturedImage))callback
 {
-    self.scaledImage = [self.fullImage fastttScaledImageOfSize:size];
+    self.fullImage = [self.fullImage fastttScaledImageOfSize:size];
     
     if (callback) {
         callback(self);
@@ -61,10 +61,8 @@ withPreviewOrientation:(UIDeviceOrientation)previewOrientation
 - (void)normalizeWithCallback:(void (^)(FastttCapturedImage *capturedImage))callback
 {
     UIImage *normalizedFullImage = [self.fullImage fastttImageWithNormalizedOrientation];
-    UIImage *normalizedScaledImage = [self.scaledImage fastttImageWithNormalizedOrientation];
     
     self.fullImage = normalizedFullImage;
-    self.scaledImage = normalizedScaledImage;
     self.isNormalized = YES;
     
     if (callback) {
